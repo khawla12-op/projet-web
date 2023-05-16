@@ -1,11 +1,33 @@
 const express = require('express');
 const router = express.Router();
-const Article = require('../models/article');
+const { PrismaClient } = require('@prisma/client');
 
-// Récupérer tous les articles
+const prisma = new PrismaClient();
+
+// Middleware pour récupérer un article par ID
+async function getArticle(req, res, next) {
+  try {
+    const article = await prisma.article.findUnique({
+      where: { id: parseInt(req.params.id) },
+    });
+    if (article == null) {
+      return res.status(404).json({ message: 'Article non trouvé' });
+    }
+    res.article = article;
+    next();
+  } catch (err) {
+    return res.status(500).json({ message: err.message });
+  }
+}
+
 router.get('/', async (req, res) => {
   try {
-    const articles = await Article.find();
+    const take = parseInt(req.query.take) || 10; // Nombre d'articles à récupérer (par défaut 10)
+    const skip = parseInt(req.query.skip) || 0; // Position à partir de laquelle récupérer les articles (par défaut 0)
+    const articles = await prisma.article.findMany({
+      skip,
+      take,
+    });
     res.json(articles);
   } catch (err) {
     res.status(500).json({ message: err.message });
@@ -19,17 +41,19 @@ router.get('/:id', getArticle, (req, res) => {
 
 // Créer un nouvel article
 router.post('/', async (req, res) => {
-  const article = new Article({
-    titre: req.body.titre,
-    contenu: req.body.contenu,
-    image: req.body.image,
-    createdAt: req.body.createdAt,
-    updatedAt: req.body.updatedAt,
-    published: req.body.published
-  });
+  const { titre, contenu, image, createdAt, updatedAt, published } = req.body;
 
   try {
-    const newArticle = await article.save();
+    const newArticle = await prisma.article.create({
+      data: {
+        titre,
+        contenu,
+        image,
+        createdAt,
+        updatedAt,
+        published,
+      },
+    });
     res.status(201).json(newArticle);
   } catch (err) {
     res.status(400).json({ message: err.message });
@@ -38,27 +62,33 @@ router.post('/', async (req, res) => {
 
 // Mettre à jour un article
 router.patch('/:id', getArticle, async (req, res) => {
-  if (req.body.titre != null) {
-    res.article.titre = req.body.titre;
+  const { titre, contenu, image, createdAt, updatedAt, published } = req.body;
+  const updatedData = {};
+
+  if (titre != null) {
+    updatedData.titre = titre;
   }
-  if (req.body.contenu != null) {
-    res.article.contenu = req.body.contenu;
+  if (contenu != null) {
+    updatedData.contenu = contenu;
   }
-  if (req.body.image != null) {
-    res.article.image = req.body.image;
+  if (image != null) {
+    updatedData.image = image;
   }
-  if (req.body.createdAt != null) {
-    res.article.createdAt = req.body.createdAt;
+  if (createdAt != null) {
+    updatedData.createdAt = createdAt;
   }
-  if (req.body.updatedAt != null) {
-    res.article.updatedAt = req.body.updatedAt;
+  if (updatedAt != null) {
+    updatedData.updatedAt = updatedAt;
   }
-  if (req.body.published != null) {
-    res.article.published = req.body.published;
+  if (published != null) {
+    updatedData.published = published;
   }
 
   try {
-    const updatedArticle = await res.article.save();
+    const updatedArticle = await prisma.article.update({
+      where: { id: parseInt(req.params.id) },
+      data: updatedData,
+    });
     res.json(updatedArticle);
   } catch (err) {
     res.status(400).json({ message: err.message });
@@ -68,25 +98,12 @@ router.patch('/:id', getArticle, async (req, res) => {
 // Supprimer un article
 router.delete('/:id', getArticle, async (req, res) => {
   try {
-    await res.article.remove();
+    await prisma.article.delete({
+      where: { id: parseInt(req.params.id) },
+    });
     res.json({ message: 'Article supprimé' });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
 });
 
-// Middleware pour récupérer un article par ID
-async function getArticle(req, res, next) {
-  try {
-    const article = await Article.findById(req.params.id);
-    if (article == null) {
-      return res.status(404).json({ message: 'Article non trouvé' });
-    }
-    res.article = article;
-    next();
-  } catch (err) {
-    return res.status(500).json({ message: err.message });
-  }
-}
-
-module.exports = router;

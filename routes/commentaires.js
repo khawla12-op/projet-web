@@ -1,17 +1,23 @@
 const express = require('express');
 const router = express.Router();
 const Commentaire = require('../models/commentaire');
+const {PrismaClient}=require('@prisma/client')
+const prisma=new PrismaClientconst 
 
-// Récupérer tous les commentaires
+// Récupérer les commentaires en utilisant les paramètres de pagination "take" et "skip"
 router.get('/', async (req, res) => {
-  try {
-    const commentaires = await Commentaire.find();
-    res.json(commentaires);
-  } catch (err) {
-    res.status(500).json({ message: err.message });
-  }
-});
-
+    try {
+      const take = req.query.take ? parseInt(req.query.take) : 10; // default value of take is 10
+      const skip = req.query.skip ? parseInt(req.query.skip) : 0; // default value of skip is 0
+      
+      const commentaires = await Commentaire.find().skip(skip).limit(take);
+      res.json(commentaires);
+    } catch (err) {
+      res.status(500).json({ message: err.message });
+    }
+  });
+  
+  
 // Récupérer un commentaire par son ID
 router.get('/:id', getCommentaire, (req, res) => {
   res.json(res.commentaire);
@@ -33,7 +39,7 @@ router.post('/', async (req, res) => {
 });
 
 // Mettre à jour un commentaire
-router.patch('/:id', getCommentaire, async (req, res) => {
+router.patch('/', getCommentaire, async (req, res) => {
   if (req.body.email != null) {
     res.commentaire.email = req.body.email;
   }
@@ -72,5 +78,6 @@ async function getCommentaire(req, res, next) {
     return res.status(500).json({ message: err.message });
   }
 }
+
 
 module.exports = router;

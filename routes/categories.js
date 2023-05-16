@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const Categorie = require('../models/categorie');
+//const Categorie = require('../models/categorie');
+const {PrismaClient}=require('@prisma/client')
+const prisma=new PrismaClient
 
 // GET /categories - Récupère take catégories à partir de la position skip
 router.get('/', async (req, res) => {
@@ -34,7 +36,7 @@ router.post('/', async (req, res) => {
 });
 
 // PATCH /categories/:id - Met à jour la catégorie ayant l'id donné avec les données envoyées dans le corps de la requête
-router.patch('/:id', async (req, res) => {
+router.patch('/', async (req, res) => {
   const categorie = await Categorie.findById(req.params.id);
   if (!categorie) {
     res.status(404).json({ message: 'Catégorie non trouvée' });
