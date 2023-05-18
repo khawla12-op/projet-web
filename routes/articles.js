@@ -4,7 +4,6 @@ const { PrismaClient } = require('@prisma/client');
 
 const prisma = new PrismaClient();
 
-// Middleware pour récupérer un article par ID
 async function getArticle(req, res, next) {
   try {
     const article = await prisma.article.findUnique({
@@ -107,3 +106,4 @@ router.delete('/:id', getArticle, async (req, res) => {
   }
 });
 
+module.exports = router;
