@@ -1,38 +1,54 @@
 const express = require('express');
 const router = express.Router();
-const Commentaire = require('../models/commentaire');
 const {PrismaClient}=require('@prisma/client')
-const prisma=new PrismaClientconst 
+const prisma=new PrismaClient();
 
 // Récupérer les commentaires en utilisant les paramètres de pagination "take" et "skip"
-router.get('/', async (req, res) => {
-    try {
-      const take = req.query.take ? parseInt(req.query.take) : 10; // default value of take is 10
-      const skip = req.query.skip ? parseInt(req.query.skip) : 0; // default value of skip is 0
+// router.get('/', async (req, res) => {
+//     try {
+//       const take = req.query.take ? parseInt(req.query.take) : 10; // default value of take is 10
+//       const skip = req.query.skip ? parseInt(req.query.skip) : 0; // default value of skip is 0
       
-      const commentaires = await Commentaire.find().skip(skip).limit(take);
-      res.json(commentaires);
-    } catch (err) {
-      res.status(500).json({ message: err.message });
-    }
-  });
+//       const commentaires = await prisma.commentaire.find().skip(skip).limit(take);
+//       res.json(commentaires);
+//     } catch (err) {
+//       res.status(500).json({ message: err.message });
+//     }
+//   });
   
   
 // Récupérer un commentaire par son ID
-router.get('/:id', getCommentaire, (req, res) => {
-  res.json(res.commentaire);
+router.get('/:article', async (req, res) => {
+  const article = req.params.article;
+  const comments = await prisma.commentaire.findMany({
+    where: {
+      articleId: Number(article),
+    },
+    orderBy: {
+      id: "desc"
+    }
+  })
+
+  res.json(comments);
 });
 
 // Ajouter un commentaire
-router.post('/', async (req, res) => {
-  const commentaire = new Commentaire({
-    email: req.body.email,
-    contenu: req.body.contenu
-  });
+router.post('/:article', async (req, res) => {
+  const { email, content } = req.body;
 
   try {
-    const newCommentaire = await commentaire.save();
-    res.status(201).json(newCommentaire);
+    const newComment = await prisma.commentaire.create({
+      data: {
+        email,
+        contenu: content,
+        article: {
+          connect: {
+            id: Number(req.params.article)
+          }
+        }
+      },
+    });
+    res.status(201).json(newComment);
   } catch (err) {
     res.status(400).json({ message: err.message });
   }

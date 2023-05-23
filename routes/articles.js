@@ -8,6 +8,9 @@ async function getArticle(req, res, next) {
   try {
     const article = await prisma.article.findUnique({
       where: { id: parseInt(req.params.id) },
+      include: {
+        auteur: true
+      }
     });
     if (article == null) {
       return res.status(404).json({ message: 'Article non trouvé' });
@@ -26,6 +29,12 @@ router.get('/', async (req, res) => {
     const articles = await prisma.article.findMany({
       skip,
       take,
+      include:{
+        auteur:true,
+        _count:{
+          select:{commentaires:true}
+        }
+      }
     });
     res.json(articles);
   } catch (err) {

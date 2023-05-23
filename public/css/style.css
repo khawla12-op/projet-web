@@ -1,0 +1,442 @@
+
+.nav-item a{
+    color: white;
+
+    }
+    
+.collapse{
+    justify-content: space-between;
+   }
+ 
+.navbar{
+  background-color: Black !important;
+}
+.bi{
+  color:white;
+}
+
+.search {
+  display: flex;
+  gap:5px
+}
+.Explore-container {
+  display:flex;
+  gap: 20px;
+}
+
+.Explore-container .filter-section {
+  width: 30%;
+}
+
+.Explore-container #articles-list {
+  width: 70%;
+}
+.contenuArticle h4{
+  font-size: 14px;
+  color:#777
+}
+.Explore-container #articles-list article {
+  width: 100%;
+}
+
+.welcome{
+
+/*width: 660px;
+height: 204px;
+left: 91px;
+top: 219px;
+*/
+font-family: 'Playfair Display';
+font-weight: 700;
+font-size: 50px;
+line-height: 85px;
+color: #141313;
+}
+.FirtContainer{
+  display:flex;
+  padding:20px;
+}
+.SecondContainer{
+  display:flex;
+  padding:20px;
+}
+/*
+.col-md-6{
+  vertical-align: middle;
+  border: 1px solid black;
+  margin: 10px;
+  border-radius: 4px;
+  padding: 5px;
+  width: 150px;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  justify-content:flex-end
+  
+}
+*/
+img[class^="article-image-"] {
+  border: 2px solid black;
+  width:150px;
+  height:150px;
+}
+.row{
+  display:flex;
+}
+.row2{
+  display:block;
+}
+.image1{
+
+width: auto;
+height: 50px;
+
+}
+.image2{
+  width: 50%;
+  right: 16px;
+}
+.paragraph{
+  left:20px
+}
+.btn{
+  top: 50%;
+  font-size: 15px;
+}
+.line{
+  font-size: Bold;
+}
+hr {
+  border: none;
+  height: 3px;
+  background-color: rgb(10, 8, 8);
+  font-weight: bold;
+  width: 50%;
+  margin: 0 auto;
+}
+article h1 {
+  font-size: 15px;
+  font-weight: normal;
+  margin:auto;
+  color:rgb(30, 28, 28);
+}
+.imageWithH1{
+  display: flex;
+  margin:2px;
+  
+}
+.contenuArticle{
+  padding:10px;
+}
+
+.contenuArticle h1 {
+  font-size: 18px;
+  color:black;
+  font-weight: bold;
+}
+
+.contenuArticle h2 {
+  font-size: 13px;
+  color: black;
+  font-style:normal;
+
+}
+.Date{
+
+  font-size: 12px;
+}
+
+footer {
+  background-color: black;
+  color: white;
+  padding: 20px;
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+
+.contact-info, .subscription, .account {
+  flex: 1 1 300px;
+  margin-bottom: 20px;
+  padding:10px;
+}
+
+.contact-info h3, .subscription h3, .account h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+  text-decoration: underline;
+  color: aquamarine;
+  
+}
+.button {
+  position: relative;
+  overflow: hidden;
+  height: 3rem;
+  padding: 0 2rem;
+  border-radius: 1.5rem;
+  background: #3d3a4e;
+  color: #fff;
+  border: none;
+  text-align: center;
+  margin:0 auto;
+  
+
+}
+
+
+.button:hover::before {
+  transform: scaleX(1);
+}
+
+.button-content {
+  position: relative;
+  z-index: 1;
+}
+
+.button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  width: 100%;
+  height: inherit;
+  border-radius: inherit;
+  background: linear-gradient(
+    82.3deg,
+    rgba(150, 93, 233, 1) 10.8%,
+    rgba(99, 88, 238, 1) 94.3%
+  );
+  transition: all 0.475s;
+}
+
+p {
+  margin: 5px 0;
+}
+
+form input {
+  width: 100%;
+  padding: 5px;
+  margin-bottom: 10px;
+}
+
+
+.map{
+margin-top:10px;
+}
+
+.h3 {
+  color: #7dbe2e; 
+}
+
+.contact-info .highlightFooter {
+  color: #00bbff;
+}
+.SubscribeAccount{
+  display: flex;
+ 
+}
+.AB{
+    text-align: center;
+    padding-bottom: 30px;
+}
+/*Working on Contact session*/
+
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+}
+
+.containerContact {
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  font-size: 24px;
+
+}
+
+.left {
+  width: 40%;
+}
+
+.right {
+  width: 55%;
+}
+
+.contact-info-Contact{
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.info h3 {
+  font-size: 18px;
+  margin: 0;
+}
+
+.info p {
+  margin: 0;
+  color: #777;
+}
+
+form input,
+form textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+form textarea {
+  height: 100px;
+}
+
+.buttonContact {
+  padding: 10px 20px;
+}
+
+.positionA {
+  text-align: center;
+  padding-bottom: 30px;
+  text-decoration: underline;
+}
+
+.positionB {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.highlight-icon {
+  margin-right: 10px;
+}
+
+.icon-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-container-Contact {
+ 
+  border-radius: 50%;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+ 
+}
+*/
+h1.h1About{
+  color:#fff
+}
+
+
+/*Fin Working on Contact session
+/*Working on footer section*/
+
+.about{
+  margin:0px;
+  padding:0px;
+  box-sizing:border-box;
+   text-align:center;
+   line-height:1.5;
+   letter-spacing:1px;
+}
+.wrapper{
+   min-height: 100vh;
+   width:100%;
+   background-image:url('../images/computer.jpg');
+   background-position:center ;
+   background-repeat: no-repeat;
+   background-size:cover;
+}
+
+.testimonial{
+  padding:20px 100px;
+}
+article h1{
+  font-size: 30px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+}
+.h1About:after{
+  content:"";
+  height: 5px;
+  width:255px;
+  background-color: #fdfaf7;
+  display:block;
+  margin:auto;
+
+}
+.imgperso{
+  height: 200px;
+  width:2OOpx;
+  border-radius:50%;
+  margin-top:60px
+
+}
+blockquote{
+  font-family:sans-serif;
+  font-size:20px;
+  margin-top:20px;
+  color:white
+
+}
+.pAbout{
+  color:aliceblue
+}
+h1About{
+  color:white
+}
+article h5{
+  text-transform: uppercace;
+  font-size: 30px;
+  margin-top: 30px;
+  color:white
+
+}
+article p{
+    font-size:17px;
+    color:rgb(32, 30, 30)
+
+}
+
+/*working on filter section*/
+.filter-section label {
+  font-weight: bold;
+}
+
+.filter-section input[type="text"],
+.filter-section select {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 200px;
+  margin-bottom: 10px;
+}
+
+.filter-section input[type="text"]::placeholder {
+  color: #999;
+}
+
+.filter-section select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-color: #fff;
+  background-image: url("down-arrow.png"); /* Remplacez par le chemin de votre propre image de flèche vers le bas */
+  background-repeat: no-repeat;
+  background-position: right center;
+  padding-right: 24px; /* Assurez-vous d'ajuster cela en fonction de la largeur de votre image de flèche vers le bas */
+}
+
+
