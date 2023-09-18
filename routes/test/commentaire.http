@@ -1,0 +1,26 @@
+### Créer un nouveau commentaire ###
+POST http://localhost:3000/commentaires
+Content-Type: application/json
+
+{
+  "email": "john.doe@example.com",
+  "contenu": "Très bon article !",
+  "articleId": 1
+}
+
+### Obtenir tous les commentaires ###
+GET http://localhost:3000/commentaires
+
+### Obtenir un commentaire spécifique ###
+GET http://localhost:3000/commentaires/1
+
+### Mettre à jour un commentaire ###
+PUT http://localhost:3000/commentaires/1
+Content-Type: application/json
+
+{
+  "contenu": "Excellent article !"
+}
+
+### Supprimer un commentaire ###
+DELETE http://localhost:3000/commentaires/1

@@ -1,0 +1,28 @@
+
+### Créer un nouvel utilisateur ###
+POST http://localhost:3306/users
+Content-Type: application/json
+
+{
+  "nom": "John Doe",
+  "email": "john.doe@example.com",
+  "password": "password123",
+  "role": "AUTHOR"
+}
+
+### Obtenir tous les utilisateurs ###
+GET http://localhost:3306/users
+
+### Obtenir un utilisateur spécifique ###
+GET http://localhost:3306/users/1
+
+### Mettre à jour un utilisateur ###
+PUT http://localhost:3000/users/1
+Content-Type: application/json
+
+{
+  "nom": "Jane Doe"
+}
+
+### Supprimer un utilisateur ###
+DELETE http://localhost:3306/users/1

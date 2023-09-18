@@ -1,0 +1,31 @@
+### Créer un nouvel article ###
+POST http://localhost:3306/articles
+Content-Type: application/json
+
+{
+  "titre": "Mon premier article",
+  "contenu": "Ceci est le contenu de mon premier article.",
+  "image": "image.jpg",
+  "createdAt": "2023-05-16T12:00:00Z",
+  "updatedAt": "2023-05-16T12:00:00Z",
+  "published": true,
+  "auteurId": 1,
+  "categories": [1, 2]
+}
+
+### Obtenir tous les articles ###
+GET http://localhost:3306/articles
+
+### Obtenir un article spécifique ###
+GET http://localhost:3306/articles/1
+
+### Mettre à jour un article ###
+PUT http://localhost:3306/articles/1
+Content-Type: application/json
+
+{
+  "contenu": "Nouveau contenu de l'article"
+}
+
+### Supprimer un article ###
+DELETE http://localhost:3306/articles/1
